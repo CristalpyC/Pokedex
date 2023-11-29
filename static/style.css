@@ -2,10 +2,10 @@ body {
     font-family: 'Jost', sans-serif;
     margin: 0;
     padding: 0;
-    /*background-color: #f0f0f0;*/
-    background-image: url('https://static.vecteezy.com/system/resources/previews/012/564/933/non_2x/watercolor-light-grey-background-texture-hand-painted-artistic-black-and-white-backdrop-stains-on-paper-aquarelle-monochrome-painting-wallpaper-photo.jpg');
+    background-image: url('./img/backgroundImg.jpg');
     background-repeat: no-repeat;
     background-size: cover;
+    background-attachment: fixed;
 }
 
 .title{
@@ -25,6 +25,9 @@ header {
 
 header h1{
     font-size: 5vmin;
+    border-bottom: 2px solid #fff3f3;
+    white-space: nowrap;
+    animation: escribir 4s steps(50) alternate;
 }
 
 input {
@@ -55,8 +58,7 @@ main {
     overflow: hidden;
     width: 15%;
     margin: 10px;
-    /*background-color: #fff;*/
-    background-image: url('https://tcg.pokemon.com/assets/img/home/wallpapers/wallpaper-46.jpg');
+    background-image: url('./img/CardsBg.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     cursor: pointer;
@@ -110,19 +112,45 @@ main {
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
     backdrop-filter: blur(10px);
+    
+   
 }
 
 .modal-content {
-    background-image: url('https://i.pinimg.com/originals/ee/cb/19/eecb19a7a4a6aed08dc9abd6238616ec.png');
+    background-image: url('./img/modalBg.png');
     background-repeat: no-repeat;
     background-size: cover;
-    margin: 10% auto;
+    margin: 5% auto;
     padding: 20px;
     border: 1px solid #888;
-    width: 80%;
+    width: 80%; 
     border-bottom-left-radius: 85px;
     border-top-right-radius: 85px;
+    animation-name: pulseAnimation;
+    animation-duration: 1s;
 }
+
+/*Animaciones*/
+@keyframes pulseAnimation {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.1);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
+@keyframes escribir {
+    from {
+      width: 0;
+    }
+    to {
+      width: 100%;
+    }
+  }
 
 .close {
     margin-left: 25px;
@@ -207,6 +235,14 @@ main {
     .card{
         width: 20%;
     }
+
+    .modal-content{
+        margin-top: 85px;
+    }
+
+    /*.modal{
+        width: 20%;
+    }*/
 }
 
 @media screen and (max-width: 650px){
@@ -217,6 +253,7 @@ main {
     input{
         width: 35%;
     }
+
 }
 
 @media screen and (max-width: 420px){
@@ -227,8 +264,14 @@ main {
     input{
         margin-top: 5px;
     }
+
+    .infos{
+        font-size: 3vmin;
+    }
 }
 
-
-
-
+@media screen and (max-width: 1320px){
+    .pokemonContent img{
+       width: 20%;
+    }
+}

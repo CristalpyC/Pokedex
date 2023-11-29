@@ -1,4 +1,3 @@
-// scripts.js
 const pokedexContainer = document.getElementById('pokedexContainer');
 const searchInput = document.getElementById('searchInput');
 const modalContent = document.getElementById('modalContent');
@@ -19,7 +18,7 @@ function showNotFoundMessage() {
     if (!existingMessage) {
         const notFoundMessage = document.createElement('div');
         notFoundMessage.classList.add('not-found-message');
-        notFoundMessage.innerHTML = `<img src="https://i.pinimg.com/originals/b8/dd/59/b8dd59733418a869a53f44b2e439eacd.gif">`;
+        notFoundMessage.innerHTML = `<img src="https://i.gifer.com/YOPR.gif">`;
         pokedexContainer.appendChild(notFoundMessage);
     }
 }
@@ -36,10 +35,7 @@ async function searchPokemon() {
 
     if (filteredPokemon.length === 0) {
         // Si no se encuentra ningún Pokémon, muestra el mensaje decorado
-        const errorMessage = document.createElement('div');
-        errorMessage.classList.add('not-found-message');
-        errorMessage.innerHTML = `<img src="https://i.pinimg.com/originals/b8/dd/59/b8dd59733418a869a53f44b2e439eacd.gif">`;
-        container.appendChild(errorMessage);
+        showNotFoundMessage();
     } else {
         // Si se encuentra Pokémon, muestra la lista
         populatePokedex(filteredPokemon, false);
@@ -75,16 +71,11 @@ function getGenderIcon(genderRate) {
     if (genderRate === -1) {
         return '♦'; // Icono para Pokémon sin género
     } else {
-        const femaleIcon = '<span class="femaleGender">♀</span>';
-        const maleIcon = '<span class="mascGender">♂</span>';
-        return `${maleIcon}/${femaleIcon}`;
+        return genderRate === 0 ? '<span class="femaleGender">♀</span>' : '<span class="mascGender">♂</span>';
     }
 }
 
 function populatePokedex(pokemonList, append) {
-    // Limpiar mensajes anteriores
-    //clearMessages();
-
     const container = append ? pokedexContainer : document.getElementById('pokedexContainer');
     if (!append) {
         container.innerHTML = '';
@@ -106,14 +97,6 @@ function populatePokedex(pokemonList, append) {
         }); 
         
 }
-
-/*function clearMessages() {
-    // Limpiar mensajes anteriores
-    const notFoundMessage = document.querySelector('.not-found-message');
-    if (notFoundMessage) {
-        notFoundMessage.remove();
-    }
-}*/
 
 async function openModal(pokemon) {
     modalContent.innerHTML = `
