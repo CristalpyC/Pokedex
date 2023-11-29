@@ -1,0 +1,234 @@
+body {
+    font-family: 'Jost', sans-serif;
+    margin: 0;
+    padding: 0;
+    /*background-color: #f0f0f0;*/
+    background-image: url('https://static.vecteezy.com/system/resources/previews/012/564/933/non_2x/watercolor-light-grey-background-texture-hand-painted-artistic-black-and-white-backdrop-stains-on-paper-aquarelle-monochrome-painting-wallpaper-photo.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.title{
+    display: flex;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    background-color: #a82711;
+    color: #fffaf2;
+    text-align: center;
+    padding: 15px;
+    box-shadow: 0px 2px 5px gray;
+    text-shadow: 4px 1px 5px rgba(255,255,202,0.6);
+}
+
+header h1{
+    font-size: 5vmin;
+}
+
+input {
+    width: 25%;
+    padding: 5px 5px 5px 15px;
+    height: 5vh;
+    border: none;
+    border-radius: 25px;
+    margin-top: 25px;
+    box-shadow: 0px 2px 5px gray;
+}
+
+input::placeholder{
+    font-size: 2vmin;
+}
+
+main {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 20px;
+}
+
+.card {
+    border: 1px solid #ddd;
+    border-radius: 15px;
+    padding: 15px;
+    overflow: hidden;
+    width: 15%;
+    margin: 10px;
+    /*background-color: #fff;*/
+    background-image: url('https://tcg.pokemon.com/assets/img/home/wallpapers/wallpaper-46.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    cursor: pointer;
+    transition: transform 0.3s;
+    box-shadow: 0px 2px 5px #a82711;
+}
+
+.card:hover{
+    transform: scale(0.8);
+}
+
+.cardInfo{
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.cardInfo p{
+    font-family: 'Jost', sans-serif;
+    font-family: 'Satisfy', cursive;
+}
+
+.pokemonsImg{
+    margin-bottom: 0;
+}
+
+.types{
+    color: #82877e;
+    font-size: 2.2vmin;
+}
+
+.pokemonsTitle{
+    font-size: 4vmin;
+    margin-bottom: 0;
+}
+
+
+.card img {
+    width: 100%;
+    height: auto;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+}
+
+.modal-content {
+    background-image: url('https://i.pinimg.com/originals/ee/cb/19/eecb19a7a4a6aed08dc9abd6238616ec.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: 10% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    border-bottom-left-radius: 85px;
+    border-top-right-radius: 85px;
+}
+
+.close {
+    margin-left: 25px;
+    margin-top: 15px;
+    color: #a82711;
+    float: top;
+    font-size: 2.3vmin;
+    border: none;
+    padding: 8px;
+    background-color: #f8efea;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    font-style: italic;
+    box-shadow: 0px 2px 5px gray;
+}
+
+.modalContent{
+    background-color: #ffffff;
+    padding: 25px;
+    border-bottom-left-radius: 85px;
+    border-top-right-radius: 85px;
+    box-shadow: 0px 2px 5px gray;
+}
+
+.modalContent h2{
+    font-size: 6vmin;
+    margin-bottom: 0;
+    margin-top: 0;
+    text-align: center;
+    font-family: 'Satisfy', cursive;
+}
+
+.pokemonContent{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.infos{
+    margin-top: 45px;
+    margin-left: 35px;
+    font-size: 2.3vmin;
+}
+
+.femaleGender{
+    color: #e14376;
+    font-weight: bold;
+}
+
+.mascGender{
+    color: #00aaff;
+    font-weight: bold;
+}
+
+.infos span{
+    font-weight: bold;
+}
+
+.pokemonContent img{
+    width: 30%;
+    border: #990000 5px solid;
+    border-radius: 255px;
+}
+
+.close:hover,
+.close:focus {
+    background-color: #d6cac6;
+    cursor: pointer;
+}
+
+.error-message {
+    background-color: #ff9999;
+    color: #990000;
+    padding: 10px;
+    border: 1px solid #990000;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+@media screen and (max-width: 988px){
+    .card{
+        width: 20%;
+    }
+}
+
+@media screen and (max-width: 650px){
+    .card{
+        width: 30%;
+    }
+
+    input{
+        width: 35%;
+    }
+}
+
+@media screen and (max-width: 420px){
+    .card{
+        width: 50%;
+    }
+
+    input{
+        margin-top: 5px;
+    }
+}
+
+
+
+
