@@ -1,17 +1,22 @@
+//variables globales
+//CRISTAL TAVAREZ (2021-1859)
 const pokedexContainer = document.getElementById('pokedexContainer');
 const searchInput = document.getElementById('searchInput');
 const modalContent = document.getElementById('modalContent');
 const pokemonModal = document.getElementById('pokemonModal');
 
-const itemsPerPage = 15;
+const pokemonsNum = 15;
 
+//Funciones
+//Realiza una solicitud a la API de PokeAPI para obtener una lista inicial de Pokémon.
 async function fetchInitialPokemon() {
-    const response = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=${itemsPerPage}`);
+    const response = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=${pokemonsNum}`);
     const data = await response.json();
     const initialPokemonList = await Promise.all(data.results.map(pokemon => fetchPokemonData(pokemon.name)));
     return initialPokemonList;
 }
 
+//Retorna una imagen con signos de interrogación si la busqueda no devuelve resultados
 function showNotFoundMessage() {
     // Verificar si ya hay un mensaje y evitar la duplicación
     const existingMessage = document.querySelector('.not-found-message');
@@ -23,18 +28,21 @@ function showNotFoundMessage() {
     }
 }
 
+//RAGBERT
+//Inicializa la pokedex, mostrando los pokemones
 async function initializePokedex() {
     const initialPokemonList = await fetchInitialPokemon();
     populatePokedex(initialPokemonList, false);
 }
 
+//Realiza una búsqueda de Pokémon según el término ingresado en el campo de búsqueda.
 async function searchPokemon() {
     const searchTerm = searchInput.value.toLowerCase();
     const initialPokemonList = await fetchInitialPokemon();
     const filteredPokemon = initialPokemonList.filter(pokemon => pokemon.name.toLowerCase().includes(searchTerm));
 
     if (filteredPokemon.length === 0) {
-        // Si no se encuentra ningún Pokémon, muestra el mensaje decorado
+        // Si no se encuentra ningún Pokémon, muestra la imagen
         showNotFoundMessage();
     } else {
         // Si se encuentra Pokémon, muestra la lista
@@ -42,6 +50,7 @@ async function searchPokemon() {
     }
 }
 
+//Realiza solicitudes a la API de PokeAPI para obtener datos detallados de un Pokémon.
 async function fetchPokemonData(pokemonName) {
     try {
         const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`);
@@ -67,6 +76,8 @@ async function fetchPokemonData(pokemonName) {
     }
 }
 
+//GABRIEL
+//Devuelve un icono que representa el género del Pokémon (macho, hembra o sin género).
 function getGenderIcon(genderRate) {
     if (genderRate === -1) {
         return '♦'; // Icono para Pokémon sin género
@@ -75,12 +86,12 @@ function getGenderIcon(genderRate) {
     }
 }
 
+//Llena el contenedor de la Pokédex con tarjetas de Pokémon.
 function populatePokedex(pokemonList, append) {
     const container = append ? pokedexContainer : document.getElementById('pokedexContainer');
     if (!append) {
         container.innerHTML = '';
     }
-
 
     pokemonList.forEach((pokemon, index) => {
         const card = document.createElement('div');
@@ -98,6 +109,9 @@ function populatePokedex(pokemonList, append) {
         
 }
 
+
+//ARIEL
+//Abre un modal que muestra información detallada sobre un Pokémon específico
 async function openModal(pokemon) {
     modalContent.innerHTML = `
         <div class="modalContent">
@@ -122,12 +136,14 @@ async function openModal(pokemon) {
     pokemonModal.style.display = 'block';
 }
 
+//Cierra el modal y elimina su contenido
 function closeModal() {
     pokemonModal.style.display = 'none';
     modalContent.innerHTML = '';
 }
 
+//Ejecuta la función searchPokemon cuando se introduce texto en el campo de búsqueda
 searchInput.addEventListener('input', searchPokemon);
 
+////Se ejecuta la función initializePokedex al cargar la página para cargar inicialmente la lista de Pokémon
 initializePokedex();
-
