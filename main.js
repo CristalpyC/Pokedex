@@ -16,39 +16,6 @@ async function fetchInitialPokemon() {
     return initialPokemonList;
 }
 
-//Retorna una imagen con signos de interrogación si la busqueda no devuelve resultados
-function showNotFoundMessage() {
-    // Verificar si ya hay un mensaje y evitar la duplicación
-    const existingMessage = document.querySelector('.not-found-message');
-    if (!existingMessage) {
-        const notFoundMessage = document.createElement('div');
-        notFoundMessage.classList.add('not-found-message');
-        notFoundMessage.innerHTML = `<img src="https://i.gifer.com/YOPR.gif">`;
-        pokedexContainer.appendChild(notFoundMessage);
-    }
-}
-
-//RAGBERT
-//Inicializa la pokedex, mostrando los pokemones
-async function initializePokedex() {
-    const initialPokemonList = await fetchInitialPokemon();
-    populatePokedex(initialPokemonList, false);
-}
-
-//Realiza una búsqueda de Pokémon según el término ingresado en el campo de búsqueda.
-async function searchPokemon() {
-    const searchTerm = searchInput.value.toLowerCase();
-    const initialPokemonList = await fetchInitialPokemon();
-    const filteredPokemon = initialPokemonList.filter(pokemon => pokemon.name.toLowerCase().includes(searchTerm));
-
-    if (filteredPokemon.length === 0) {
-        // Si no se encuentra ningún Pokémon, muestra la imagen
-        showNotFoundMessage();
-    } else {
-        // Si se encuentra Pokémon, muestra la lista
-        populatePokedex(filteredPokemon, false);
-    }
-}
 
 //Realiza solicitudes a la API de PokeAPI para obtener datos detallados de un Pokémon.
 async function fetchPokemonData(pokemonName) {
@@ -67,24 +34,30 @@ async function fetchPokemonData(pokemonName) {
             types: types,
             info: `<span>Altura:</span> ${data.height}, <span>Peso:</span> ${data.weight}`,
             stats: stats,
-            category: speciesData.genera.find(genus => genus.language.name === 'en').genus,
+            category: speciesData.genera.find(genus => genus.language.name === 'es').genus,
             gender: getGenderIcon(speciesData.gender_rate),
         };
+        
     } catch (error) {
         console.error('Error fetching Pokemon data:', error);
         return null;
     }
 }
 
-//GABRIEL
-//Devuelve un icono que representa el género del Pokémon (macho, hembra o sin género).
-function getGenderIcon(genderRate) {
-    if (genderRate === -1) {
-        return '♦'; // Icono para Pokémon sin género
-    } else {
-        return genderRate === 0 ? '<span class="femaleGender">♀</span>' : '<span class="mascGender">♂</span>';
+
+//RAGBERT POLANCO (2022-0532)
+//Retorna una imagen con signos de interrogación si la busqueda no devuelve resultados
+function showNotFoundMessage() {
+    // Verificar si ya hay un mensaje y evitar la duplicación
+    const existingMessage = document.querySelector('.not-found-message');
+    if (!existingMessage) {
+        const notFoundMessage = document.createElement('div');
+        notFoundMessage.classList.add('not-found-message');
+        notFoundMessage.innerHTML = `<img src="https://i.gifer.com/YOPR.gif">`;
+        pokedexContainer.appendChild(notFoundMessage);
     }
 }
+
 
 //Llena el contenedor de la Pokédex con tarjetas de Pokémon.
 function populatePokedex(pokemonList, append) {
@@ -109,8 +82,31 @@ function populatePokedex(pokemonList, append) {
         
 }
 
+//Realiza una búsqueda de Pokémon según el término ingresado en el campo de búsqueda.
+async function searchPokemon() {
+    const searchTerm = searchInput.value.toLowerCase();
+    const initialPokemonList = await fetchInitialPokemon();
+    const filteredPokemon = initialPokemonList.filter(pokemon => pokemon.name.toLowerCase().includes(searchTerm));
 
-//ARIEL
+    if (filteredPokemon.length === 0) {
+        // Si no se encuentra ningún Pokémon, muestra la imagen
+        showNotFoundMessage();
+    } else {
+        // Si se encuentra el Pokémon, muestra la lista
+        populatePokedex(filteredPokemon, false);
+    }
+}
+
+//GABRIEL MEJIA (2022-0192)
+//Devuelve un icono que representa el género del Pokémon (macho, hembra o sin género).
+function getGenderIcon(genderRate) {
+    if (genderRate === -1) {
+        return '♦'; // Icono para Pokémon sin género
+    } else {
+        return genderRate === 0 ? '<span class="femaleGender">♀</span>' : '<span class="mascGender">♂</span>';
+    }
+}
+
 //Abre un modal que muestra información detallada sobre un Pokémon específico
 async function openModal(pokemon) {
     modalContent.innerHTML = `
@@ -136,6 +132,9 @@ async function openModal(pokemon) {
     pokemonModal.style.display = 'block';
 }
 
+
+
+//ARIEL CUSTODIO (2021-2054)
 //Cierra el modal y elimina su contenido
 function closeModal() {
     pokemonModal.style.display = 'none';
@@ -144,6 +143,12 @@ function closeModal() {
 
 //Ejecuta la función searchPokemon cuando se introduce texto en el campo de búsqueda
 searchInput.addEventListener('input', searchPokemon);
+
+//Inicializa la pokedex, mostrando los pokemones
+async function initializePokedex() {
+    const initialPokemonList = await fetchInitialPokemon();
+    populatePokedex(initialPokemonList, false);
+}
 
 ////Se ejecuta la función initializePokedex al cargar la página para cargar inicialmente la lista de Pokémon
 initializePokedex();
