@@ -39,7 +39,7 @@ async function fetchPokemonData(pokemonName) {
         };
         
     } catch (error) {
-        console.error('Error fetching Pokemon data:', error);
+        console.error('Error al obtener los datos:', error);
         return null;
     }
 }
